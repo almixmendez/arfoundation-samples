@@ -24,22 +24,33 @@ public class PlaceOnPlane : MonoBehaviour
         if (Input.touchCount == 0)
             return;
 
-        if (aRRaycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
-        {
-            var hitPose = hits[0].pose;
+        Touch touch = Input.GetTouch(0);
 
-            if (spawnedObject == null)
+        if (touch.phase == TouchPhase.Began)
+        {
+            if (aRRaycastManager.Raycast(touch.position, hits, TrackableType.PlaneWithinPolygon))
             {
+                var hitPose = hits[0].pose;
                 spawnedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
             }
-            else
-            {
-                spawnedObject.transform.position = hitPose.position;
-                spawnedObject.transform.rotation = hitPose.rotation;
-            }
-            Vector3 lookPos = Camera.main.transform.position - spawnedObject.transform.position;
-            lookPos.y = 0;
-            spawnedObject.transform.rotation = Quaternion.LookRotation(lookPos);
         }
+
+        //if (aRRaycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
+        //{
+        //    var hitPose = hits[0].pose;
+
+        //    if (spawnedObject == null)
+        //    {
+        //        spawnedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
+        //    }
+        //    else
+        //    {
+        //        spawnedObject.transform.position = hitPose.position;
+        //        spawnedObject.transform.rotation = hitPose.rotation;
+        //    }
+        //    Vector3 lookPos = Camera.main.transform.position - spawnedObject.transform.position;
+        //    lookPos.y = 0;
+        //    spawnedObject.transform.rotation = Quaternion.LookRotation(lookPos);
+        //}
     }
 }
