@@ -34,23 +34,9 @@ public class PlaceOnPlane : MonoBehaviour
                 spawnedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
             }
         }
-
-        //if (aRRaycastManager.Raycast(Input.GetTouch(0).position, hits, TrackableType.PlaneWithinPolygon))
-        //{
-        //    var hitPose = hits[0].pose;
-
-        //    if (spawnedObject == null)
-        //    {
-        //        spawnedObject = Instantiate(placedPrefab, hitPose.position, hitPose.rotation);
-        //    }
-        //    else
-        //    {
-        //        spawnedObject.transform.position = hitPose.position;
-        //        spawnedObject.transform.rotation = hitPose.rotation;
-        //    }
-        //    Vector3 lookPos = Camera.main.transform.position - spawnedObject.transform.position;
-        //    lookPos.y = 0;
-        //    spawnedObject.transform.rotation = Quaternion.LookRotation(lookPos);
-        //}
+        
+        Vector3 lookPos = Camera.main.transform.position - spawnedObject.transform.position;
+        lookPos.y = 0;
+        spawnedObject.transform.rotation = Quaternion.LookRotation(lookPos);
     }
 }
